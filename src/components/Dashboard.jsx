@@ -1,3 +1,4 @@
+// src/components/Dashboard.jsx
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -21,14 +22,14 @@ function Dashboard({ logout }) {
 
   const fetchLeads = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:8000/api/leads/')
+      const res = await axios.get('/api/leads/')
       setLeads(res.data)
     } catch (error) { console.error(error) }
   }
 
   const fetchCarreras = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:8000/api/carreras/')
+      const res = await axios.get('/api/carreras/')
       setCarreras(res.data)
     } catch (error) { console.error(error) }
   }
@@ -40,7 +41,7 @@ function Dashboard({ logout }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://127.0.0.1:8000/api/leads/', formData)
+      await axios.post('/api/leads/', formData)
       alert("Lead registrado correctamente")
       fetchLeads()
       setFormData({ nombre: '', apellido: '', email: '', telefono: '', estado: 'NUEVO', carrera_interes: '' })
@@ -53,7 +54,7 @@ function Dashboard({ logout }) {
   const handleDelete = async (id) => {
     if (window.confirm("¿Confirmas la eliminación?")) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/leads/${id}/`)
+        await axios.delete(`/api/leads/${id}/`)
         fetchLeads()
       } catch (error) { console.error(error) }
     }
@@ -63,7 +64,7 @@ function Dashboard({ logout }) {
     <div className="min-h-screen bg-slate-900 text-slate-100 p-8 font-sans">
       <div className="max-w-6xl mx-auto">
         
-        {/* HEADER CON BOTÓN DE LOGOUT Y KPI */}
+        {/* HEADER */}
         <header className="mb-10 flex justify-between items-center border-b border-slate-700 pb-4">
           <div>
             <h1 className="text-3xl font-bold text-blue-500">EMI CRM</h1>
@@ -71,7 +72,6 @@ function Dashboard({ logout }) {
           </div>
           
           <div className="flex gap-4 items-center">
-            {/* Botón Cerrar Sesión */}
             <button 
               onClick={logout}
               className="text-slate-400 hover:text-white font-medium text-sm border border-slate-600 px-3 py-2 rounded hover:bg-slate-800 transition"
@@ -79,7 +79,6 @@ function Dashboard({ logout }) {
               Cerrar Sesión
             </button>
 
-            {/* Tarjeta de contador */}
             <div className="bg-blue-600 px-6 py-2 rounded-lg shadow-lg font-bold flex flex-col items-center">
               <span className="text-xs text-blue-200 uppercase">Total Leads</span>
               <span className="text-2xl">{leads.length}</span>
@@ -89,7 +88,7 @@ function Dashboard({ logout }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* COLUMNA IZQUIERDA: FORMULARIO */}
+          {/* FORMULARIO */}
           <div className="bg-slate-800 p-6 rounded-xl shadow-2xl border border-slate-700 h-fit">
             <h2 className="text-xl font-semibold mb-6 text-white flex items-center gap-2">
               <span>🚀</span> Nuevo Registro
@@ -120,7 +119,6 @@ function Dashboard({ logout }) {
                 value={formData.telefono} onChange={handleChange}
               />
 
-              {/* SELECT DINÁMICO DE CARRERAS */}
               <div className="relative">
                 <select 
                   name="carrera_interes" 
@@ -150,7 +148,7 @@ function Dashboard({ logout }) {
             </form>
           </div>
 
-          {/* COLUMNA DERECHA: TABLA DE DATOS */}
+          {/* TABLA */}
           <div className="lg:col-span-2">
             <div className="bg-slate-800 rounded-xl shadow-2xl border border-slate-700 overflow-hidden">
               <div className="overflow-x-auto">
