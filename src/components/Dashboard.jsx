@@ -12,7 +12,7 @@ function Dashboard({ logout }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [leadSeleccionado, setLeadSeleccionado] = useState(null)
   const [nuevaInteraccion, setNuevaInteraccion] = useState({
-    tipo: 'Llamada Telefónica',
+    tipo: 'LLAMADA',
     notas: ''
   })
 
@@ -95,7 +95,7 @@ function Dashboard({ logout }) {
   const abrirSeguimiento = (lead) => {
     setLeadSeleccionado(lead)
     setModalOpen(true)
-    setNuevaInteraccion({ tipo: 'Llamada Telefónica', notas: '' })
+    setNuevaInteraccion({ tipo: 'LLAMADA', notas: '' })
   }
 
   const guardarInteraccion = async (e) => {
@@ -287,10 +287,10 @@ function Dashboard({ logout }) {
                   value={nuevaInteraccion.tipo}
                   onChange={(e) => setNuevaInteraccion({...nuevaInteraccion, tipo: e.target.value})}
                 >
-                  <option>Llamada Telefónica</option>
-                  <option>Mensaje de WhatsApp</option>
-                  <option>Correo Electrónico</option>
-                  <option>Reunión Presencial</option>
+                  <option value="LLAMADA">Llamada Telefónica</option>
+                  <option value="WHATSAPP">Mensaje de WhatsApp</option>
+                  <option value="EMAIL">Correo Electrónico</option>
+                  <option value="REUNION">Reunión Presencial</option>
                 </select>
                 <input 
                   type="text" 
