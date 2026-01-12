@@ -266,7 +266,7 @@ function Dashboard({ logout }) {
                     <div className="bg-slate-700 p-4 rounded-lg flex-1 border border-slate-600">
                       <div className="flex justify-between mb-2">
                         <span className="font-bold text-blue-300">{interaccion.tipo}</span>
-                        <span className="text-xs text-slate-400">{new Date(interaccion.fecha_creacion).toLocaleDateString()}</span>
+                        <span className="text-xs text-slate-400">{new Date(interaccion.fecha).toLocaleDateString()}</span>
                       </div>
                       <p className="text-slate-200 text-sm">{interaccion.notas}</p>
                     </div>
